@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Expense & Budget Visualizer - Aplikasi untuk mencatat dan memvisualisasikan pengeluaran harian."
+    >
+
+    <title>Expense & Budget Visualizer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- =========================
+         APP CONTAINER
+    ========================== -->
+    <div class="app-container">
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">
+                    💰
+                </div>
+
+                <div>
+                    <h1>Spendly</h1>
+                    <span>Budget Visualizer</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="#transactions" class="nav-item">
+                    <span>📝</span>
+                    <span>Transactions</span>
+                </a>
+
+                <a href="#analytics" class="nav-item">
+                    <span>📈</span>
+                    <span>Analytics</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Expense & Budget Visualizer</p>
+                <small>Built with HTML, CSS & JavaScript</small>
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div>
+                    <p class="welcome-text">Welcome back 👋</p>
+                    <h2>Expense Dashboard</h2>
+                </div>
+
+                <button
+                    type="button"
+                    id="themeToggle"
+                    class="theme-toggle"
+                    aria-label="Toggle dark mode"
+                >
+                    🌙
+                </button>
+
+            </header>
+
+
+            <!-- =========================
+                 DASHBOARD
+            ========================== -->
+            <section id="dashboard" class="dashboard-section">
+
+                <!-- SUMMARY CARDS -->
+                <div class="summary-grid">
+
+                    <div class="summary-card total-card">
+                        <div class="card-icon">💸</div>
+
+                        <div>
+                            <p>Total Pengeluaran</p>
+                            <h3 id="totalBalance">Rp 0</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="summary-card transaction-card">
+                        <div class="card-icon">🧾</div>
+
+                        <div>
+                            <p>Total Transaksi</p>
+                            <h3 id="totalTransactions">0</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="summary-card average-card">
+                        <div class="card-icon">📊</div>
+
+                        <div>
+                            <p>Rata-rata Transaksi</p>
+                            <h3 id="averageExpense">Rp 0</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="summary-card highest-card">
+                        <div class="card-icon">🔥</div>
+
+                        <div>
+                            <p>Pengeluaran Terbesar</p>
+                            <h3 id="highestExpense">Rp 0</h3>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- MAIN DASHBOARD GRID -->
+                <div class="dashboard-grid">
+
+                    <!-- ADD TRANSACTION -->
+                    <section class="panel transaction-form-panel">
+
+                        <div class="panel-header">
+                            <div>
+                                <h3>Tambah Transaksi</h3>
+                                <p>Catat pengeluaran Anda</p>
+                            </div>
+                        </div>
+
+                        <form id="transactionForm">
+
+                            <div class="form-group">
+                                <label for="itemName">
+                                    Nama Item
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="itemName"
+                                    placeholder="Contoh: Makan siang"
+                                    required
+                                >
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="amount">
+                                    Nominal
+                                </label>
+
+                                <div class="input-with-prefix">
+                                    <span>Rp</span>
+
+                                    <input
+                                        type="number"
+                                        id="amount"
+                                        min="1"
+                                        placeholder="50000"
+                                        required
+                                    >
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="category">
+                                    Kategori
+                                </label>
+
+                                <select id="category" required>
+
+                                    <option value="">
+                                        Pilih kategori
+                                    </option>
+
+                                    <option value="Food">
+                                        🍔 Makanan
+                                    </option>
+
+                                    <option value="Transport">
+                                        🚗 Transportasi
+                                    </option>
+
+                                    <option value="Fun">
+                                        🎮 Hiburan
+                                    </option>
+
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="transactionDate">
+                                    Tanggal
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="transactionDate"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="primary-button"
+                            >
+                                <span>＋</span>
+                                Tambah Transaksi
+                            </button>
+
+                        </form>
+
+                    </section>
+
+
+                    <!-- PIE CHART -->
+                    <section id="analytics" class="panel chart-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+                                <h3>Distribusi Pengeluaran</h3>
+                                <p>Pengeluaran berdasarkan kategori</p>
+                            </div>
+
+                        </div>
+
+                        <div class="chart-wrapper">
+
+                            <canvas id="expenseChart"></canvas>
+
+                            <div
+                                id="emptyChart"
+                                class="empty-chart"
+                            >
+                                <span>📊</span>
+                                <p>Belum ada data pengeluaran</p>
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="chartLegend"
+                            class="chart-legend"
+                        ></div>
+
+                    </section>
+
+                </div>
+
+
+                <!-- =========================
+                     MONTHLY SUMMARY
+                ========================== -->
+                <section class="panel monthly-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Ringkasan Bulanan</h3>
+                            <p>Melihat pengeluaran berdasarkan bulan</p>
+                        </div>
+
+                        <select
+                            id="monthFilter"
+                            class="month-filter"
+                        >
+                        </select>
+
+                    </div>
+
+
+                    <div class="monthly-stats">
+
+                        <div class="monthly-stat">
+                            <span class="stat-label">
+                                Total Bulan Ini
+                            </span>
+
+                            <strong id="monthlyTotal">
+                                Rp 0
+                            </strong>
+                        </div>
+
+
+                        <div class="monthly-stat">
+                            <span class="stat-label">
+                                Jumlah Transaksi
+                            </span>
+
+                            <strong id="monthlyTransactions">
+                                0
+                            </strong>
+                        </div>
+
+
+                        <div class="monthly-stat">
+                            <span class="stat-label">
+                                Kategori Terbesar
+                            </span>
+
+                            <strong id="monthlyTopCategory">
+                                -
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     CUSTOM CATEGORY
+                ========================== -->
+                <section class="panel custom-category-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Kategori Custom</h3>
+                            <p>Tambahkan kategori pengeluaran Anda sendiri</p>
+                        </div>
+
+                    </div>
+
+
+                    <form
+                        id="categoryForm"
+                        class="category-form"
+                    >
+
+                        <input
+                            type="text"
+                            id="customCategoryName"
+                            placeholder="Contoh: Pendidikan"
+                            required
+                        >
+
+                        <button
+                            type="submit"
+                            class="secondary-button"
+                        >
+                            ＋ Tambah Kategori
+                        </button>
+
+                    </form>
+
+
+                    <div
+                        id="customCategoryList"
+                        class="custom-category-list"
+                    >
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     TRANSACTIONS
+                ========================== -->
+                <section
+                    id="transactions"
+                    class="panel transactions-panel"
+                >
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Riwayat Transaksi</h3>
+                            <p>Daftar semua pengeluaran Anda</p>
+                        </div>
+
+                        <div class="transaction-actions">
+
+                            <select id="sortFilter">
+
+                                <option value="newest">
+                                    Terbaru
+                                </option>
+
+                                <option value="oldest">
+                                    Terlama
+                                </option>
+
+                                <option value="highest">
+                                    Nominal Terbesar
+                                </option>
+
+                                <option value="lowest">
+                                    Nominal Terkecil
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="transactionList"
+                        class="transaction-list"
+                    >
+                    </div>
+
+
+                    <div
+                        id="emptyState"
+                        class="empty-state"
+                    >
+                        <div class="empty-icon">
+                            🧾
+                        </div>
+
+                        <h4>Belum ada transaksi</h4>
+
+                        <p>
+                            Tambahkan transaksi pertama Anda
+                            menggunakan formulir di atas.
+                        </p>
+                    </div>
+
+                </section>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- TOAST NOTIFICATION -->
+    <div
+        id="toast"
+        class="toast"
+    >
+        <span id="toastMessage"></span>
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="js/script.js"></script>
+
+</body>
+</html>
