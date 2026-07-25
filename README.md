@@ -1,7 +1,6 @@
 # 💰 Expense & Budget Visualizer
 
-Expense & Budget Visualizer adalah aplikasi web sederhana untuk membantu pengguna mencatat, mengelola, dan memvisualisasikan pengeluaran sehari-hari.
----
+Expense & Budget Visualizer adalah aplikasi web sederhana untuk membantu pengguna mencatat, mengelola, dan memvisualisasikan pengeluaran sehari-hari
 
 ## 🚀 Fitur Utama
 
