@@ -1,12 +1,6 @@
-# **CodingCamp-20July2026-rohmani**
-Repository mini project coding 20 July 2026 software engineer revou
-
 # 💰 Expense & Budget Visualizer
 
 Expense & Budget Visualizer adalah aplikasi web sederhana untuk membantu pengguna mencatat, mengelola, dan memvisualisasikan pengeluaran sehari-hari.
-
-Proyek ini dibuat sebagai bagian dari pembelajaran Software Engineering.
-
 ---
 
 ## 🚀 Fitur Utama
